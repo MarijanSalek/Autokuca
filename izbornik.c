@@ -8,18 +8,13 @@ void izbornik() {
 	odabir = odabir_Korisnika ();
 
 	switch (odabir) {
-	case 1: 
-		izbornik_Korisnika();
+	case 1:
+		izbornikAdmin ();            
 		break;
 	case 2: 
-		izbornik_Korisnika();
+		izbornikKorisnik();
 		break;
-	case 3:
-		izbornik_Korisnika();
-		break;
-	case 4:
-		izbornik_Korisnika();
-		break;
+	
 	default:
 		printf("\n Kraj programa, stisnite bilo koju tipku za završetak.\n");
 		scanf();
