@@ -5,19 +5,21 @@
 
 void izbornik() {
 	int odabir;
-	odabir = odabir_Korisnika ();
+	odabir = odabirKorisnika();
 
 	switch (odabir) {
+
 	case 1:
-		izbornikAdmin ();            
-		break;
-	case 2: 
 		izbornikKorisnik();
 		break;
-	
+
+	case 2:
+		izbornikAdmin();
+		break;
+
 	default:
-		printf("\n Kraj programa, stisnite bilo koju tipku za završetak.\n");
-		scanf();
+		printf("\nKraj programa, stisnite bilo koju tipku za kraj programa.\n");
+		_getch();
 		break;
 	}
 	getch();

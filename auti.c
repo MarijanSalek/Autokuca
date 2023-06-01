@@ -177,45 +177,45 @@ void ispisAuta() {
 
 bool editAutomobila(int tempId) {
 	FILE* fajl = NULL;
-	
+
 	AUTO* sviAutomobili = NULL;
 
 	AUTO* tempAutomobili = NULL;
-	
+
 	sviAutomobili = ucitavanjeAuta(sviAutomobili);
 
-	
+
 	if (sviAutomobili == NULL) {
 		return false;
 	}
 	else {
-		
-		
+
+
 		AUTO* tempAuto = NULL;
-		
+
 		int brElem = ucitavanjeBrojaAuta();
 
 
 		for (int i = 0; i < brElem; i++) {
-			
+
 			int tmpId = sviAutomobili[i].id;
 
 			if (tempId == tmpId) {
-		
+
 				tempAuto = &sviAutomobili[i];
-		
+
 				printf("Pronadjen auto sa ID-om: %d\n", tempId);
-				
+
 				printf("Model pronadjenog automobila: %s\n", (*tempAuto).model);
 
-			
+
 				break;
 			}
 		}
 
-	
+
 		if (tempAuto != NULL) {
-	
+
 			printf("\nPrethodna godina proizvodnje: %d", (*tempAuto).godina_proizvodnje);
 			printf("\nUnesite novu godinu proizvodnje: ");
 			scanf(" %d", &(*tempAuto).godina_proizvodnje);
@@ -244,17 +244,17 @@ bool editAutomobila(int tempId) {
 			getchar();
 			printf("Nova snaga motora je: %d\n", (*tempAuto).snaga_motora);
 
-		
+
 			fajl = fopen("auti.bin", "w");
 
-		
+
 			if (fajl != NULL) {
-				
+
 				tempAutomobili = (AUTO*)calloc(brElem, sizeof(AUTO));
 
-			
+
 				if (tempAutomobili != NULL) {
-			
+
 					for (int i = 0; i < brElem; i++) {
 						strcpy((tempAutomobili + i)->model, (sviAutomobili + i)->model);
 						strcpy((tempAutomobili + i)->boja, (sviAutomobili + i)->boja);
@@ -262,17 +262,17 @@ bool editAutomobila(int tempId) {
 						(tempAutomobili + i)->snaga_motora = (sviAutomobili + i)->snaga_motora;
 						(tempAutomobili + i)->cijena = (sviAutomobili + i)->cijena;
 						(tempAutomobili + i)->id = (sviAutomobili + i)->id;
-						
+
 					}
 				}
-				
+
 				fwrite(&brElem, sizeof(int), 1, fajl);
 				rewind(fajl);
 				fseek(fajl, 0, SEEK_END);
 				fwrite(tempAutomobili, sizeof(AUTO), brElem, fajl);
 				fclose(fajl);
 
-		
+
 				free(sviAutomobili);
 				free(tempAutomobili);
 			}
