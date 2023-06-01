@@ -6,9 +6,9 @@
 
 
 void kupnjaAuta() {
-	AUTO* auti = NULL;
+	AUTO* auto = NULL;
 	AUTO temp;
-	auti = ucitavanjeAuta(auti);
+	auto = ucitavanjeAuta(auto);
 	int brAuta = ucitavanjeBrojaAuta();
 
 	int i;
@@ -20,17 +20,18 @@ void kupnjaAuta() {
 	int stanje = 0;
 
 	FILE* datoteka;
-	char* ime_dat = "prodaniAuti.txt";
+	char* imeDat = "prodaniAuti.txt";
 
 	printf("Unesite ID auta koji zelite kupiti: ");
 	scanf("%d", &temp.id);
 	system("cls");
 
-	for (i = 0; i < brAuta; i++) {
-		if ((auti + i)->id == temp.id) {
+	for (i = 0; i < brojAuta; i++) {
+		if ((auto + i)->id == temp.id) {
 			printf("Jeste li mislili na ovaj automobil?:\n\n");
-			printf("Model: %s\nBoja: %s\nGodina proizvodnje: %d ", (auti + i)->model, (auti + i)->boja, (auti + i)->godina_proizvodnje);
-			printf("\nSnaga motora: %d \nCijena: %d \nID: %d", (auti + i)->snaga_motora, (auti + i)->cijena, (auti + i)->id);
+			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (auto + i)->marka, (auto + i)->karoserija, (auto + i)->model);
+			printf("\nGodina proizvodnje: %d \nSnaga: %d \nObujam: %d", (auto + i)->godinaProizvodnje, (auto + i)->snaga, (auto + i)->obujam);
+			printf("\nCijena: %d \nBoja: %s \nID: %d", (auto + i)->cijena, (auto + i)->boja, (auto + i)->id);
 			printf("\n\n");
 			flag = 1;
 		}
@@ -61,16 +62,17 @@ void kupnjaAuta() {
 
 	system("cls");
 
-	datoteka = fopen(ime_dat, "a");
+	datoteka = fopen(imeDat, "a");
 	if (datoteka == NULL) {
 		printf("Nije moguce otvoriti datoteku\n ");
 		exit(EXIT_FAILURE);
 	}
 	else {
-		for (i = 0; i < brAuta; i++) {
-			if ((auti + i)->id == temp.id) {
-				fprintf(datoteka, "Model: %s\nBoja: %s\nGodina proizvodnje: %d ", (auti + i)->model, (auti + i)->boja, (auti + i)->godina_proizvodnje);
-				fprintf(datoteka, "\nSnaga motora: %d \nCijena: %d \nID: %d", (auti + i)->snaga_motora, (auti + i)->cijena, (auti + i)->id);
+		for (i = 0; i < brojAuta; i++) {
+			if ((auto + i)->id == temp.id) {
+				fprintf(datoteka, "Brend: %s\nKaroserija: %s\nModel: %s ", (auto + i)->marka, (auto + i)->karoserija, (auto + i)->model);
+				fprintf(datoteka, "\nGodina proizvodnje: %d \nSnaga: %d \nObujam: %d", (auto + i)->godinaProizvodnje, (auto + i)->snaga, (auto + i)->obujam);
+				fprintf(datoteka, "\nCijena: %d \nBoja: %s \nID: %d", (auto + i)->cijena, (auto + i)->boja, (auto + i)->id);
 				fprintf(datoteka, "\n\n");
 				flag = 1;
 			}

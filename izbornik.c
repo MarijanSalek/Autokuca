@@ -5,7 +5,7 @@
 
 void izbornik() {
 	int odabir;
-	odabir = odabirKorisnika();
+	odabir = izborKorisnik();
 
 	switch (odabir) {
 

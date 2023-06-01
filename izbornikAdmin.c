@@ -12,7 +12,7 @@ void izbornikAdmin() {
 	int idUredenje;
 	bool uredenjeUspjesno;
 
-	while (prijava_Admin(&admin) == false && flag < 4) {
+	while (adminPrijava(&admin) == false && flag < 4) {
 		flag++;
 		if (flag == 3) {
 			printf("Neuspjesno logiranje, iskoristili ste sve pokusaje!");
@@ -43,7 +43,7 @@ void izbornikAdmin() {
 
 	case 1:
 		system("cls");
-		unosNovogAuta();
+		unosNovog();
 		break;
 
 	case 2:
@@ -73,8 +73,8 @@ void izbornikAdmin() {
 		printf("Unesite ID automobila za uredjivanje: ");
 		scanf(" %d", &idUredenje);
 
-		uredenjeUspjesno = editAutomobila(idUredenje);
-		if (editSuccess == true) {
+		uredenjeUspjesno = uredivanjeAuta(idUredenje);
+		if (uredenjeUspjesno == true) {
 			printf("Automobil (ID: %d) uspjesno uredjen", idUredenje);
 		}
 		else {

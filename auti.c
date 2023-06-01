@@ -3,19 +3,19 @@
 #include <stdlib.h>
 #include "header.h"
 
-void kreiranjeDatotekeAuti() {
+void kreiranjeDatoteke() {
 	FILE* datAuti = NULL;
-	char* ime_dat = "auti.bin";
-	datAuti = fopen(ime_dat, "rb");
+	char* imeDat = "automobili.bin";
+	datAuti = fopen(imeDat, "rb");
 	if (datAuti == NULL) {
-		datAuti = fopen(ime_dat, "wb");
+		datAuti = fopen(imeDat, "wb");
 		if (datAuti == NULL) {
-			printf("Nije moguce kreirati datoteku auti.bin\n ");
+			printf("Nije moguce kreirati datoteku automobili.bin\n ");
 			printf("\nKraj programa\n");
 			exit(EXIT_FAILURE);
 		}
 		else {
-			printf("Uspjesno ste kreirali datoteku auti.bin\n");
+			printf("Uspjesno ste kreirali datoteku automobili.bin\n");
 			fclose(datAuti);
 		}
 	}
@@ -26,18 +26,18 @@ void kreiranjeDatotekeAuti() {
 
 AUTO* ucitavanjeAuta(AUTO* automobil) {
 	FILE* datoteka = NULL;
-	char* ime_dat = "auti.bin";
-	int broj_proizvoda = ucitavanjeBrojaAuta();
-	automobil = (AUTO*)calloc(broj_proizvoda, sizeof(AUTO));
+	char* imeDat = "automobili.bin";
+	int brojProizvoda = ucitavanjeBrojaAuta();
+	automobil = (AUTO*)calloc(brojProizvoda, sizeof(AUTO));
 	if (automobil != NULL) {
-		datoteka = fopen(ime_dat, "rb");
+		datoteka = fopen(imeDat, "rb");
 		if (datoteka == NULL) {
 			printf("Neuspjesno otvaranje datoteke za citanje\n");
 		}
 		else {
 			rewind(datoteka);
 			fseek(datoteka, 4, SEEK_SET);
-			fread(automobil, sizeof(AUTO), broj_proizvoda, datoteka);
+			fread(automobil, sizeof(AUTO), brojProizvoda, datoteka);
 			fclose(datoteka);
 		}
 	}
@@ -45,13 +45,13 @@ AUTO* ucitavanjeAuta(AUTO* automobil) {
 }
 
 int ucitavanjeBrojaAuta() {
-	int brAuta = 0;
+	int brojAuta = 0;
 	FILE* datoteka = NULL;
-	char* ime_dat = "auti.bin";
-	datoteka = fopen(ime_dat, "rb");
+	char* imeDat = "automobili.bin";
+	datoteka = fopen(imeDat, "rb");
 	if (datoteka != NULL) {
 		rewind(datoteka);
-		fread(&brAuta, sizeof(int), 1, datoteka);
+		fread(&brojAuta, sizeof(int), 1, datoteka);
 		fclose(datoteka);
 	}
 	else {
@@ -59,44 +59,55 @@ int ucitavanjeBrojaAuta() {
 		printf("\nKraj programa\n");
 		exit(EXIT_FAILURE);
 	}
-	return brAuta;
+	return brojAuta;
 }
 
-void unosNovogAuta() {
+void unosNovog() {
 	AUTO noviAuto = { 0 };
 	AUTO* sviAuti = NULL;
 	FILE* datoteka = NULL;
 	int flag = 1;
 	int i = 0;
-	char* ime_dat = "auti.bin";
-	int brojAuta = ucitavanjeBrojaAuta();
-	if (brojAuta == 0) {
-		datoteka = fopen(ime_dat, "rb+");
+	char* imeDat = "automobili.bin";
+	int brAuta = ucitavanjeBrojaAuta();
+	if (brAuta == 0) {
+		datoteka = fopen(imeDat, "rb+");
 		if (datoteka != NULL) {
 			if (datoteka == NULL) {
-				printf("Nije moguce kreirati datoteku auti.bin\n ");
+				printf("Nije moguce kreirati datoteku automobili.bin\n ");
 				printf("\nKraj programa\n");
 				exit(EXIT_FAILURE);
 			}
 			else {
-				printf("Unesite ime modela\n");
+				printf("Unesite ime brenda automobila\n");
 				getchar();
-				scanf("%29[^\n]", &noviAuto.model);
-				printf("Unesite boju auta\n");
+				scanf("%29[^\n]", &noviAuto.marka);
+				
+				printf("Unesite karoseriju automobila\n");
 				getchar();
-				scanf("%29[^\n]", &noviAuto.boja);
+				scanf("%12[^\n]", &noviAuto.karoserija);
+				
+				printf("Unesite model automobila\n");
+				getchar();
+				scanf("%12[^\n]", &noviAuto.model);
 
 				printf("Unesite godinu proizvodnje\n");
-				scanf(" %d", &noviAuto.godina_proizvodnje);
-				printf("Unesite snagu motora auta (u kw)\n");
-				scanf(" %d", &noviAuto.snaga_motora);
-				printf("Unesite cijenu auta(u kn)\n");
+				scanf(" %d", &noviAuto.godinaProizvodnje);
+
+				printf("Unesite snagu motora automobila (KW)\n");
+				scanf(" %d", &noviAuto.snaga);
+
+				printf("Unesite obujam motora automobila (cm3)\n");
+				scanf(" %d", &noviAuto.obujam);
+
+				printf("Unesite cijenu auta (EUR)\n");
 				scanf(" %d", &noviAuto.cijena);
-				printf("Unesite ID koji je razlicit od ostalih:\n");
+
+				printf("Unesite nepostojeci ID automobila:\n");
 				scanf(" %d", &noviAuto.id);
 
-				brojAuta += 1;
-				fwrite(&brojAuta, sizeof(int), 1, datoteka);
+				brAuta += 1;
+				fwrite(&brAuta, sizeof(int), 1, datoteka);
 				rewind(datoteka);
 				fseek(datoteka, 0, SEEK_END);
 				fwrite(&noviAuto, sizeof(AUTO), 1, datoteka);
@@ -112,30 +123,43 @@ void unosNovogAuta() {
 			exit(EXIT_FAILURE);
 		}
 		else {
-			datoteka = fopen(ime_dat, "rb+");
+			datoteka = fopen(imeDat, "rb+");
 			if (datoteka == NULL) {
 				printf("Nije moguce otvoriti datoteku auti.bin\n ");
 				printf("\nKraj programa\n");
 				exit(EXIT_FAILURE);
 			}
 			else {
-				printf("Unesite ime modela\n");
+				printf("Unesite ime brenda automobila\n");
 				getchar();
-				scanf("%29[^\n]", &noviAuto.model);
-				printf("Unesite boju auta\n");
+				scanf("%29[^\n]", &noviAuto.marka);
+
+				printf("Unesite karoseriju automobila\n");
 				getchar();
-				scanf("%29[^\n]", &noviAuto.boja);
+				scanf("%12[^\n]", &noviAuto.karoserija);
+
+				printf("Unesite model automobila\n");
+				getchar();
+				scanf("%12[^\n]", &noviAuto.model);
+
 				printf("Unesite godinu proizvodnje\n");
-				scanf(" %d", &noviAuto.godina_proizvodnje);
-				printf("Unesite snagu motora auta (u kw)\n");
-				scanf(" %d", &noviAuto.snaga_motora);
-				printf("Unesite cijenu auta (u kn)\n");
+				scanf(" %d", &noviAuto.godinaProizvodnje);
+
+				printf("Unesite snagu motora automobila (KW)\n");
+				scanf(" %d", &noviAuto.snaga);
+
+				printf("Unesite obujam motora automobila (cm3)\n");
+				scanf(" %d", &noviAuto.obujam);
+
+				printf("Unesite cijenu auta (EUR)\n");
 				scanf(" %d", &noviAuto.cijena);
+
+				
 				do {
 					flag = 1;
 					printf("Unesite ID koji je razlicit od ostalih:\n");
 					scanf(" %d", &noviAuto.id);
-					for (i = 0; i < brojAuta; i++) {
+					for (i = 0; i < brAuta; i++) {
 						if (noviAuto.id == sviAuti[i].id) {
 							flag = 0;
 							break;
@@ -145,37 +169,38 @@ void unosNovogAuta() {
 				} while (flag == 0);
 			}
 		}
-		brojAuta += 1;
-		fwrite(&brojAuta, sizeof(int), 1, datoteka);
+		brAuta += 1;
+		fwrite(&brAuta, sizeof(int), 1, datoteka);
 		rewind(datoteka);
 		fseek(datoteka, 0, SEEK_END);
 		fwrite(&noviAuto, sizeof(AUTO), 1, datoteka);
 		fclose(datoteka);
 	}
 	free(sviAuti);
-	printf("\nAuto unesen, stisnite bilo koju tipku za povratak u izbornik\n");
+	printf("\nUspjesno unesen automobil, stisnite bilo koju tipku za povratak u izbornik\n");
 	_getch();
 	system("cls");
 }
 
 void ispisAuta() {
-	AUTO* auti = NULL;
-	int brAuta = ucitavanjeBrojaAuta();
-	auti = ucitavanjeAuta(auti);
+	AUTO* auto = NULL;
+	int brojAuta = ucitavanjeBrojaAuta();
+	auto = ucitavanjeAuta(auto);
 
-	if (brAuta == 0) {
+	if (brojAuta == 0) {
 		printf("Trenutno nema auta za ispis.\n");
 	}
 	else {
-		for (int i = 0; i < brAuta; i++) {
-			printf("Model: %s\nBoja: %s\nGodina proizvodnje: %d ", (auti + i)->model, (auti + i)->boja, (auti + i)->godina_proizvodnje);
-			printf("\nSnaga motora: %d \nCijena: %d \nID: %d", (auti + i)->snaga_motora, (auti + i)->cijena, (auti + i)->id);
+		for (int i = 0; i < brojAuta; i++) {
+			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (auto + i)->marka, (auto + i)->karoserija, (auto + i)->model);
+			printf("\nGodina proizvodnje: %d \nSnaga: %d \nObujam: %d", (auto + i)->godinaProizvodnje, (auto + i)->snaga, (auto + i)->obujam);
+			printf("\nCijena: %d \nBoja: %s \nID: %d", (auto + i)->cijena, (auto + i)->boja, (auto + i)->id);
 			printf("\n\n");
 		}
 	}
 }
 
-bool editAutomobila(int tempId) {
+bool uredivanjeAuta(int tempId) {
 	FILE* fajl = NULL;
 
 	AUTO* sviAutomobili = NULL;
@@ -204,9 +229,9 @@ bool editAutomobila(int tempId) {
 
 				tempAuto = &sviAutomobili[i];
 
-				printf("Pronadjen auto sa ID-om: %d\n", tempId);
+				printf("Pronadjen automobil sa ID-om: %d\n", tempId);
 
-				printf("Model pronadjenog automobila: %s\n", (*tempAuto).model);
+				printf("Brend i model pronadjenog automobila: %s %s\n", (*tempAuto).marka(*tempAuto).model);
 
 
 				break;
@@ -216,36 +241,37 @@ bool editAutomobila(int tempId) {
 
 		if (tempAuto != NULL) {
 
-			printf("\nPrethodna godina proizvodnje: %d", (*tempAuto).godina_proizvodnje);
+			printf("\nPrethodna godina proizvodnje: %d", (*tempAuto).godinaProizvodnje);
 			printf("\nUnesite novu godinu proizvodnje: ");
-			scanf(" %d", &(*tempAuto).godina_proizvodnje);
+			scanf(" %d", &(*tempAuto).godinaProizvodnje);
 			getchar();
-			printf("Nova godina proizvodnje je: %d\n", (*tempAuto).godina_proizvodnje);
+			printf("Nova godina proizvodnje je: %d\n", (*tempAuto).godinaProizvodnje);
 
-			printf("\nPrethodna boja automobila: %s", (*tempAuto).boja);
-			printf("\nUnesite novu boju: ");
-			scanf(" %[^\n]%*c", (*tempAuto).boja);
-			printf("Nova boja je: %s\n", (*tempAuto).boja);
+			printf("\nPrethodna snaga motora: %d", (*tempAuto).snaga);
+			printf("\nUnesite novu snagu motora: ");
+			scanf(" %d", &(*tempAuto).snaga);
+			getchar();
+			printf("Nova snaga motora je: %d\n", (*tempAuto).snaga);
+
+			printf("\nPrethodni obujam motora: %d", (*tempAuto).obujam);
+			printf("\nUnesite novi obujam motora: ");
+			scanf(" %d", &(*tempAuto).obujam);
+			getchar();
+			printf("Novi obujam motora je: %d\n", (*tempAuto).obujam);
 
 			printf("\nPrethodna cijena automobila: %d", (*tempAuto).cijena);
-			printf("\nUnesite novu cijenu: ");
+			printf("\nUnesite novu cijenu automobila: ");
 			scanf(" %d", &(*tempAuto).cijena);
 			getchar();
-			printf("Nova cijena je: %d\n", (*tempAuto).cijena);
+			printf("Nova cijena automobila je: %d\n", (*tempAuto).cijena);
 
-			printf("\nPrethodni model automobila: %s", (*tempAuto).model);
-			printf("\nUnesite novi model: ");
-			scanf(" %[^\n]%*c", (*tempAuto).model);
-			printf("Novi model je: %s\n", (*tempAuto).model);
-
-			printf("\nPrethodna snaga motora: %d", (*tempAuto).snaga_motora);
-			printf("\nUnesite novu snagu motora: ");
-			scanf(" %d", &(*tempAuto).snaga_motora);
-			getchar();
-			printf("Nova snaga motora je: %d\n", (*tempAuto).snaga_motora);
+			printf("\nPrethodna boja automobila: %s", (*tempAuto).boja);
+			printf("\nUnesite novu boju automobila: ");
+			scanf(" %[^\n]%*c", (*tempAuto).boja);
+			printf("Nova boja automobila je: %s\n", (*tempAuto).boja);
 
 
-			fajl = fopen("auti.bin", "w");
+			fajl = fopen("automobil.bin", "w");
 
 
 			if (fajl != NULL) {
@@ -256,11 +282,14 @@ bool editAutomobila(int tempId) {
 				if (tempAutomobili != NULL) {
 
 					for (int i = 0; i < brElem; i++) {
+						strcpy((tempAutomobili + i)->marka, (sviAutomobili + i)->marka);
+						strcpy((tempAutomobili + i)->karoserija, (sviAutomobili + i)->karoserija);
 						strcpy((tempAutomobili + i)->model, (sviAutomobili + i)->model);
-						strcpy((tempAutomobili + i)->boja, (sviAutomobili + i)->boja);
-						(tempAutomobili + i)->godina_proizvodnje = (sviAutomobili + i)->godina_proizvodnje;
-						(tempAutomobili + i)->snaga_motora = (sviAutomobili + i)->snaga_motora;
+						(tempAutomobili + i)->godinaProizvodnje = (sviAutomobili + i)->godinaProizvodnje;
+						(tempAutomobili + i)->snaga = (sviAutomobili + i)->snaga;
+						(tempAutomobili + i)->obujam = (sviAutomobili + i)->obujam;
 						(tempAutomobili + i)->cijena = (sviAutomobili + i)->cijena;
+						strcpy((tempAutomobili + i)->boja, (sviAutomobili + i)->boja);
 						(tempAutomobili + i)->id = (sviAutomobili + i)->id;
 
 					}
@@ -288,72 +317,84 @@ bool editAutomobila(int tempId) {
 
 
 int brisanjeAuta(int id) {
-	AUTO* auti = NULL;
-	int brAuta = ucitavanjeBrojaAuta();
+	AUTO* auto = NULL;
+	int brojAuta = ucitavanjeBroja();
 	int i = 0;
 	int j = 0;
 	int flag = 0;
 	AUTO brisanje = { 0 };
 	AUTO temp;
 	FILE* datoteka = NULL;
-	char* dat_ime = "auti.bin";
+	char* datIme = "automobili.bin";
 	AUTO* Pomoc;
 
 	brisanje.id = id;
 
-	if (brAuta == 0) {
+	if (brojAuta == 0) {
 		printf("Ne postoji niti jedan automobil u datoteci, ova funkcija se ne moze izvrsiti.\n");
 		return 0;
 	}
 	else {
-		auti = ucitavanjeAuta(auti);
-		if (auti == NULL) {
+		auto = ucitavanjeAuta(auto);
+		if (auto == NULL) {
 			printf("Nije moguce procitati proizvode iz datoteke.\n");
 			_getch();
 			exit(EXIT_FAILURE);
 		}
 		else {
-			for (i = 0; i < brAuta; i++) {
-				if (brisanje.id == (auti + i)->id) {
+			for (i = 0; i < brojAuta; i++) {
+				if (brisanje.id == (auto + i)->id) {
 					flag = 1;
-					for (j = i; j < brAuta; j++) {
-						if (j + 1 == brAuta) {
+					for (j = i; j < brojAuta; j++) {
+						if (j + 1 == brojAuta) {
 							break;
 						}
 
-						strcpy(temp.model, (auti + j)->model);
-						strcpy(temp.boja, (auti + j)->boja);
-						temp.godina_proizvodnje = (auti + j)->godina_proizvodnje;
-						temp.snaga_motora = (auti + j)->snaga_motora;
-						temp.cijena = (auti + j)->cijena;
-						temp.id = (auti + j)->id;
+						strcpy(temp.marka, (auto + j)->marka);
+						strcpy(temp.karoserija, (auto + j)->karoserija;
+						strcpy(temp.model, (auto + j)->model;
+						temp.godinaProizvodnje = (auto + j)->godinaProizvodnje ;
+						temp.snaga = (auto + j)->snaga;
+						temp.obujam = (auto + j)->obujam;
+						temp.cijena = (auto + j)->cijena ;
+						strcpy(temp.boja, (auto + j)->boja);
+						temp.id = (auto + j)->id;
 
-						strcpy((auti + j)->model, (auti + j + 1)->model);
-						strcpy((auti + j)->boja, (auti + j + 1)->boja);
-						(auti + j)->godina_proizvodnje = (auti + j + 1)->godina_proizvodnje;
-						(auti + j)->snaga_motora = (auti + j + 1)->snaga_motora;
-						(auti + j)->cijena = (auti + j + 1)->cijena;
-						(auti + j)->id = (auti + j + 1)->id;
+						strcpy((auto + j)->marka, (auto + j + 1)->marka);
+						strcpy((auto + j)->karoserija, (auto + j + 1)->karoserija);
+						strcpy((auto + j)->model, (auto + j + 1)->model);
+						(auto + j)->godinaProizvodnje = (auto + j + 1)->godinaProizvodnje;
+						(auto + j)->snaga = (auto + j + 1)->snaga;
+						(auto + j)->obujam = (auto + j + 1)->obujam;
+						(auto + j)->cijena = (auto + j + 1)->cijena;
+						strcpy((auto + j)->boja, (auto + j + 1)->boja);
+						(auto + j)->id = (auto + j + 1)->id;
 
-						strcpy((auti + j + 1)->model, temp.model);
-						strcpy((auti + j + 1)->boja, temp.boja);
-						(auti + j + 1)->godina_proizvodnje = temp.godina_proizvodnje;
-						(auti + j + 1)->snaga_motora = temp.snaga_motora;
-						(auti + j + 1)->cijena = temp.cijena;
-						(auti + j + 1)->id = temp.id;
+						strcpy((auto + j + 1)->marka, temp.marka);
+						strcpy((auto + j + 1)->karoserija, temp.karoserija);
+						strcpy((auto + j + 1)->karoserija, temp.karoserija);
+						(auto + j + 1)->godinaProizvodnje = temp.godinaProizvodnje;
+						(auto + j + 1)->snaga = temp.snaga;
+						(auto + j + 1)->obujam = temp.obujam;
+						(auto + j + 1)->cijena = temp.cijena;
+						strcpy((auto + j + 1)->boja, temp.boja);
+						(auto + j + 1)->id = temp.id;
 
 					}
 				}
 			}
-			Pomoc = (AUTO*)calloc(brAuta - 1, sizeof(AUTO));
+			Pomoc = (AUTO*)calloc(brojAuta - 1, sizeof(AUTO));
 			if (Pomoc != NULL) {
-				for (i = 0; i < brAuta - 1; i++) {
-					strcpy((Pomoc + i)->model, (auti + i)->model);
-					strcpy((Pomoc + i)->boja, (auti + i)->boja);
-					(Pomoc + i)->godina_proizvodnje = (auti + i)->godina_proizvodnje;
-					(Pomoc + i)->snaga_motora = (auti + i)->snaga_motora;
-					(Pomoc + i)->cijena = (auti + i)->cijena;
-					(Pomoc + i)->id = (auti + i)->id;
+				for (i = 0; i < brojAuta - 1; i++) {
+					strcpy((Pomoc + i)->marka, (auto + i)->marka);
+					strcpy((Pomoc + i)->karoserija, (auto + i)->karoserija);
+					strcpy((Pomoc + i)->model, (auto + i)->model);
+					(Pomoc + i)->godinaProizvodnje = (auto + i)->godinaProizvodnje;
+					(Pomoc + i)->snaga = (auto + i)->snaga;
+					(Pomoc + i)->obujam = (auto + i)->obujam;
+					strcpy((Pomoc + i)->boja, (auto + i)->boja);
+					(Pomoc + i)->cijena = (auto + i)->cijena;
+					(Pomoc + i)->id = (auto + i)->id;
 				}
 			}
 			else {
@@ -361,18 +402,18 @@ int brisanjeAuta(int id) {
 				exit(EXIT_FAILURE);
 			}
 			if (flag == 1) {
-				datoteka = fopen(dat_ime, "w");
+				datoteka = fopen(datIme, "w");
 				if (datoteka != NULL) {
-					brAuta = brAuta - 1;
-					fwrite(&brAuta, sizeof(int), 1, datoteka);
+					brojAuta = brojAuta - 1;
+					fwrite(&brojAuta, sizeof(int), 1, datoteka);
 					rewind(datoteka);
 					fseek(datoteka, 4, SEEK_SET);
-					fwrite(Pomoc, sizeof(AUTO), brAuta, datoteka);
+					fwrite(Pomoc, sizeof(AUTO), brojAuta, datoteka);
 					fclose(datoteka);
 				}
 			}
 			free(Pomoc);
-			free(auti);
+			free(auto);
 			_getch();
 		}
 	}

@@ -1,6 +1,6 @@
 #ifndef HEADER_H
 #define HEADEH_H
-#include <>
+#include <stdbool.h>
 
 typdef struct auto{
 	char marka[20];
@@ -25,9 +25,18 @@ typdef struct admin {
 
 
 void izbornik();
-int odabirKorisnika();
 void izbornikAdmin();
-
+void kreiranjeDatoteke();
+void ispisAuta();
+void unosNovog();
+void izbornikKorisnik();
+void kupnjaAuta();
+int izborKorisnik();
+int ucitavanjeBrojaAuta();
+int krajPrograma(void);
+int brisanjeAuta(int id);
+bool adminPrijava(ADMIN* adminPok);
+AUTO* ucitavanjeAuta(AUTO* automobil);
 
 
 #endif

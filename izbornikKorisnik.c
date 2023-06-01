@@ -13,7 +13,7 @@ void izbornikKorisnik() {
 	AUTO temp;
 	auto = ucitavanjeAuta(auto);
 	FILE* datoteka
-		char* imeDat = "katalog.txt";
+	char* imeDat = "katalog.txt";
 
 	do {
 
