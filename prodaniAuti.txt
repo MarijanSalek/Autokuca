@@ -1,0 +1,90 @@
+Brend: Mercedes
+Karoserija: limuzina
+Model: cls 
+Godina proizvodnje: 2010 
+Snaga: 120 
+Obujam: 2200
+Cijena: 20000 
+Boja:  
+ID: 6
+
+Brend: Mercedes
+Karoserija: limuzina
+Model: E klasa 
+Godina proizvodnje: 2020 
+Snaga: 110 
+Obujam: 2200
+Cijena: 25000 
+Boja:  
+ID: 3
+
+Brend: Mercedes
+Karoserija: 1609
+Model: E klasa 
+Godina proizvodnje: 2010 
+Snaga: 110 
+Obujam: 2200
+Cijena: 15000 
+Boja:  
+ID: 3
+
+Brend: BMW
+Karoserija: SUV
+Model: X6 
+Godina proizvodnje: 2011 
+Snaga: 100 
+Obujam: 2200
+Cijena: 11300 
+Boja:  
+ID: 3
+
+Brend: fda
+Karoserija: vds
+Model: fds 
+Godina proizvodnje: 1204 
+Snaga: 4656 
+Obujam: 7
+Cijena: 456 
+Boja: mafds 
+ID: 6
+
+Brend: fda
+Karoserija: vds
+Model: fds 
+Godina proizvodnje: 1204 
+Snaga: 4656 
+Obujam: 7
+Cijena: 456 
+Boja: mafds 
+ID: 6
+
+Brend: sa
+Karoserija: d
+Model: fda 
+Godina proizvodnje: 0 
+Snaga: 0 
+Obujam: 0
+Cijena: 0 
+Boja: da 
+ID: 4
+
+Brend: fda
+Karoserija: vds
+Model: fds 
+Godina proizvodnje: 1204 
+Snaga: 4656 
+Obujam: 7
+Cijena: 456 
+Boja: mafds 
+ID: 6
+
+Brend: Mercedes
+Karoserija: coupe
+Model: E klasa 
+Godina proizvodnje: 2013 
+Snaga: 150 kW
+Obujam: 3000 cm3
+Cijena: 25000 EUR
+Boja: Bijela 
+ID: 1
+

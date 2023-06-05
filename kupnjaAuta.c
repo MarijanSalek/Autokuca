@@ -6,10 +6,10 @@
 
 
 void kupnjaAuta() {
-	AUTO* auto = NULL;
+	AUTO* automobil = NULL;
 	AUTO temp;
-	auto = ucitavanjeAuta(auto);
-	int brAuta = ucitavanjeBrojaAuta();
+	automobil = ucitavanjeAuta(automobil);
+	int brojAuta = ucitavanjeBrojaAuta();
 
 	int i;
 	int flag = 0;
@@ -27,11 +27,11 @@ void kupnjaAuta() {
 	system("cls");
 
 	for (i = 0; i < brojAuta; i++) {
-		if ((auto + i)->id == temp.id) {
+		if ((automobil + i)->id == temp.id) {
 			printf("Jeste li mislili na ovaj automobil?:\n\n");
-			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (auto + i)->marka, (auto + i)->karoserija, (auto + i)->model);
-			printf("\nGodina proizvodnje: %d \nSnaga: %d \nObujam: %d", (auto + i)->godinaProizvodnje, (auto + i)->snaga, (auto + i)->obujam);
-			printf("\nCijena: %d \nBoja: %s \nID: %d", (auto + i)->cijena, (auto + i)->boja, (auto + i)->id);
+			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (automobil + i)->marka, (automobil + i)->karoserija, (automobil + i)->model);
+			printf("\nGodina proizvodnje: %d \nSnaga: %d kW\nObujam: %d cm3", (automobil + i)->godinaProizvodnje, (automobil + i)->snaga, (automobil + i)->obujam);
+			printf("\nCijena: %d EUR\nBoja: %s \nID: %d", (automobil + i)->cijena, (automobil + i)->boja, (automobil + i)->id);
 			printf("\n\n");
 			flag = 1;
 		}
@@ -69,10 +69,10 @@ void kupnjaAuta() {
 	}
 	else {
 		for (i = 0; i < brojAuta; i++) {
-			if ((auto + i)->id == temp.id) {
-				fprintf(datoteka, "Brend: %s\nKaroserija: %s\nModel: %s ", (auto + i)->marka, (auto + i)->karoserija, (auto + i)->model);
-				fprintf(datoteka, "\nGodina proizvodnje: %d \nSnaga: %d \nObujam: %d", (auto + i)->godinaProizvodnje, (auto + i)->snaga, (auto + i)->obujam);
-				fprintf(datoteka, "\nCijena: %d \nBoja: %s \nID: %d", (auto + i)->cijena, (auto + i)->boja, (auto + i)->id);
+			if ((automobil + i)->id == temp.id) {
+				fprintf(datoteka, "Brend: %s\nKaroserija: %s\nModel: %s ", (automobil + i)->marka, (automobil + i)->karoserija, (automobil + i)->model);
+				fprintf(datoteka, "\nGodina proizvodnje: %d \nSnaga: %d kW\nObujam: %d cm3", (automobil + i)->godinaProizvodnje, (automobil + i)->snaga, (automobil + i)->obujam);
+				fprintf(datoteka, "\nCijena: %d EUR\nBoja: %s \nID: %d", (automobil + i)->cijena, (automobil + i)->boja, (automobil + i)->id);
 				fprintf(datoteka, "\n\n");
 				flag = 1;
 			}
