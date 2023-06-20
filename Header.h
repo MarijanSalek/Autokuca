@@ -3,15 +3,15 @@
 
 #include <stdbool.h>
 
-typedef struct automobil{
+typedef struct automobil {
     char marka[20];
     char karoserija[20];
-    char model[30];
+    char model[20];
     int godinaProizvodnje;
     int snaga;
     int obujam;
     int cijena;
-    char boja[12];
+    char boja[20];
     int id;
 } AUTO;
 

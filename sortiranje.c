@@ -30,7 +30,7 @@ void ispisAutaSortiranoPoCijeniRastuce() {
 		// Sortiranje automobila po cijeni od manje prema veæoj
 		qsort(automobil, brojAuta, sizeof(AUTO), usporediPoCijeniRastuce);
 
-		printf("Automobili sortirani po cijeni (od manje prema veæoj):\n");
+		printf("Automobili sortirani po cijeni (od manje prema vecoj):\n");
 		for (int i = 0; i < brojAuta; i++) {
 			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (automobil + i)->marka, (automobil + i)->karoserija, (automobil + i)->model);
 			printf("\nGodina proizvodnje: %d \nSnaga: %d kW\nObujam: %d cm3", (automobil + i)->godinaProizvodnje, (automobil + i)->snaga, (automobil + i)->obujam);
@@ -67,7 +67,7 @@ void ispisAutaSortiranoPoCijeniOpadajuce() {
 		// Sortiranje automobila po cijeni od veæe prema manjoj
 		qsort(automobil, brojAuta, sizeof(AUTO), usporediPoCijeniOpadajuce);
 
-		printf("Automobili sortirani po cijeni (od veæe prema manjoj):\n");
+		printf("Automobili sortirani po cijeni (od vece prema manjoj):\n");
 		for (int i = 0; i < brojAuta; i++) {
 			printf("Brend: %s\nKaroserija: %s\nModel: %s ", (automobil + i)->marka, (automobil + i)->karoserija, (automobil + i)->model);
 			printf("\nGodina proizvodnje: %d \nSnaga: %d kW\nObujam: %d cm3", (automobil + i)->godinaProizvodnje, (automobil + i)->snaga, (automobil + i)->obujam);

@@ -16,4 +16,3 @@ bool adminPrijava(ADMIN* adminPok) {
     else
         return false;
 }
-

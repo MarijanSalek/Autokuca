@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -27,7 +27,7 @@ void izbornikAdmin() {
 
     do {
         system("cls");
-        printf("Unesite koju radnju želite izvrsiti:\n");
+        printf("Unesite koju radnju ï¿½elite izvrsiti:\n");
         printf("\n 1) Dodavanje automobila:");
         printf("\n 2) Uklanjanje automobila");
         printf("\n 3) Ispis automobila");
@@ -72,7 +72,7 @@ void izbornikAdmin() {
             printf("Unesite ID automobila za uredjivanje: ");
             scanf(" %d", &idUredenje);
 
-          
+
             uredenjeUspjesno = uredivanjeAuta(idUredenje);
             if (uredenjeUspjesno == true) {
                 printf("Automobil (ID: %d) uspjesno uredjen\n", idUredenje);

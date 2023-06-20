@@ -88,3 +88,63 @@ Cijena: 25000 EUR
 Boja: Bijela 
 ID: 1
 
+Brend: Golf
+Karoserija: Hatchback
+Model: 7 
+Godina proizvodnje: 2018 
+Snaga: 45 kW
+Obujam: 1200 cm3
+Cijena: 10000 EUR
+Boja: Crna 
+ID: 6
+
+Brend: Golf
+Karoserija: Hatchback
+Model: 7 
+Godina proizvodnje: 2018 
+Snaga: 45 kW
+Obujam: 1200 cm3
+Cijena: 10000 EUR
+Boja: Crna 
+ID: 6
+
+Brend: Golf
+Karoserija: Hatchback
+Model: 2 
+Godina proizvodnje: 1997 
+Snaga: 50 kW
+Obujam: 1600 cm3
+Cijena: 680 EUR
+Boja: Crvena 
+ID: 5
+
+Brend: Golf
+Karoserija: Hatchback
+Model: 2 
+Godina proizvodnje: 1996 
+Snaga: 49 kW
+Obujam: 1400 cm3
+Cijena: 650 EUR
+Boja: Zelena 
+ID: 5
+
+Brend: Golf
+Karoserija: Hatchback
+Model: 2 
+Godina proizvodnje: 1996 
+Snaga: 49 kW
+Obujam: 1400 cm3
+Cijena: 650 EUR
+Boja: Zelena 
+ID: 5
+
+Brend: Audi
+Karoserija: Hatcback
+Model: A3 
+Godina proizvodnje: 2010 
+Snaga: 108 kW
+Obujam: 2000 cm3
+Cijena: 8900 EUR
+Boja: Siva 
+ID: 2
+
